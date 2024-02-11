@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import mongoose, {Schema} from "mongoose";
 import Jwt  from "jsonwebtoken";
 
 const generateAccessAndRefreshTokens = async (userId) => {
@@ -99,6 +100,8 @@ const loginUser = asyncHandler(async (req, res) => {
   //access and refresh token
   //send cookie
 
+  console.log(req, res);
+
   const { email, username, password } = req.body;
 
   if (!username || !email) {
@@ -110,7 +113,7 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!user) {
     throw new ApiError(404, "User doesn't exist ");
   }
-  const isPasswordValid = await user.isPasswordCorrect(password);
+  const isPasswordValid = await User.isPasswordCorrect(password);
   if (!isPasswordValid) {
     throw new ApiError(401, "Invalid credentials");
   }
@@ -118,7 +121,7 @@ const loginUser = asyncHandler(async (req, res) => {
   generateAccessAndRefreshTokens(
     user._id
   );
-  const loggedInUser = await User.findById(user._id).select("-password - refreshToken")
+  const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
   
   
   const options = { httpOnly : true,
@@ -216,8 +219,8 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 const changeCurrentPassword = asyncHandler(async(req, res) => {
 const {oldPassword, newPassword} = req.body
 
-const user = await User.findById(req,user?._id)
-const isPasswordCorrect = await User.isPasswordCorrect(oldPassword)
+const user = await User.findById(req.user?._id)
+const isPasswordCorrect = await user.isPasswordCorrect(oldPassword)
 
 if (!isPasswordCorrect){
   throw new ApiError(400, "Invalid old password")

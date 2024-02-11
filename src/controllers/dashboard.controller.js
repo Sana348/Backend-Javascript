@@ -10,6 +10,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
 
     // TODO: Get the channel stats like total video views,
     //  total subscribers, total videos, total likes etc.
+
     try {
         const userId = req.params.userId;
 
@@ -20,7 +21,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
         const totalViewsPipeline = [
             {
                 $match: {
-                    owner: mongoose.Types.ObjectId(userId),
+                    owner: new mongoose.Types.ObjectId(userId),
                 },
             },
             {
@@ -38,7 +39,7 @@ const getChannelStats = asyncHandler(async (req, res) => {
         const totalLikesPipeline = [
             {
                 $match: {
-                    likedBy: mongoose.Types.ObjectId(userId),
+                    likedBy: new mongoose.Types.ObjectId(userId),
                 },
             },
             {
@@ -62,6 +63,11 @@ const getChannelStats = asyncHandler(async (req, res) => {
             totalSubscribers,
         });
         
+
+        res.status(200).json(
+            new ApiResponse(200, "User stats retrieved:", totalViews)
+        );
+
     } catch (error) {
         console.error('Error getting user metrics:', error);
         new ApiError(500, "Internal Server Error")
@@ -77,7 +83,7 @@ const getChannelVideos = asyncHandler(async (req, res) => {
             // Match videos where the owner is the specified owner (creator)
             {
                 $match: {
-                    owner: mongoose.Types.ObjectId(ownerId),
+                    owner: new mongoose.Types.ObjectId(ownerId),
                 },
             },
             {
