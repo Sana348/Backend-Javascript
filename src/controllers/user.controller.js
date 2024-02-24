@@ -52,20 +52,20 @@ const registerUser = asyncHandler(async (req, res) => {
   console.log(req.files);
   const avatarLocalPath = req.files?.avatar[0]?.path;
   // const coverImageLocalPath = req.files?.coverImage[0]?.path;
-  let coverImageLocalPath;
-  if (
-    req.files &&
-    Array.isArray(req.files.coverImage) &&
-    req.files.coverImage.length > 0
-  ) {
-    coverImageLocalPath = req.files.coverImage[0].path;
-  }
+  // let coverImageLocalPath;
+  // if (
+  //   req.files &&
+  //   Array.isArray(req.files.coverImage) &&
+  //   req.files.coverImage.length > 0
+  // ) {
+  //   coverImageLocalPath = req.files.coverImage[0].path;
+  // }
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar is required");
   }
   const avatar = await uploadOnCloudinary(avatarLocalPath);
-  const coverImage = await uploadOnCloudinary(coverImageLocalPath);
+  // const coverImage = await uploadOnCloudinary(coverImageLocalPath);
 
   if (!avatar) {
     throw new ApiError(400, "Avatar is required");
@@ -73,10 +73,11 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     fullname,
     avatar: avatar.url,
-    coverImage: coverImage?.url || "",
+    // coverImage: coverImage?.url || "",
     email,
     password,
     username: username.toLowerCase(),
+  
   });
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
@@ -297,39 +298,36 @@ return res
 )
 })
 
-const updateUserCoverImage = asyncHandler(async(req, res) => {
-  const coverImageLocalPath = req.file?.path
+// const updateUserCoverImage = asyncHandler(async(req, res) => {
+//   const coverImageLocalPath = req.file?.path
 
-  if (!coverImageLocalPath) {
-      throw new ApiError(400, "Cover image file is missing")
-  }
+//   if (!coverImageLocalPath) {
+//       throw new ApiError(400, "Cover image file is missing")
+//   }
 
-  
+//   const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
-
-  const coverImage = await uploadOnCloudinary(coverImageLocalPath)
-
-  if (!coverImage.url) {
-      throw new ApiError(400, "Error while uploading on avatar")
+//   if (!coverImage.url) {
+//       throw new ApiError(400, "Error while uploading on avatar")
       
-  }
+//   }
 
-  const user = await User.findByIdAndUpdate(
-      req.user?._id,
-      {
-          $set:{
-              coverImage: coverImage.url
-          }
-      },
-      {new: true}
-  ).select("-password")
+//   const user = await User.findByIdAndUpdate(
+//       req.user?._id,
+//       {
+//           $set:{
+//               coverImage: coverImage.url
+//           }
+//       },
+//       {new: true}
+//   ).select("-password")
 
-  return res
-  .status(200)
-  .json(
-      new ApiResponse(200, user, "Cover image updated successfully")
-  )
-})
+//   return res
+//   .status(200)
+//   .json(
+//       new ApiResponse(200, user, "Cover image updated successfully")
+//   )
+// })
 
 const getUserChannelProfile = asyncHandler(async(req, res) => {
   const {username} = req.params
@@ -459,4 +457,4 @@ return res
 })
 
 
-export { registerUser, loginUser, logoutUser,refreshAccessToken,changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar,updateUserCoverImage,getUserChannelProfile, getWatchHistory };
+export { registerUser, loginUser, logoutUser,refreshAccessToken,changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar,getUserChannelProfile, getWatchHistory };
