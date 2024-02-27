@@ -30,12 +30,12 @@ This project is a centralized YouTube backend application. It provides functiona
 
 ## API Documentation
 
-- ***[Postman API'S]([link-to-postman-api-docs](https://red-astronaut-474428.postman.co/workspace/New-Team-Workspace~bfbc0679-6577-4ca9-b4ae-d7f2ecf31a12/collection/32758929-bcf644d0-658a-4883-a271-64f7e4f15456?action=share&creator=27400704))***: Detailed documentation for API endpoints
+- ***[Postman API'S]([link-to-postman-api-docs](https://red-astronaut-474428.postman.co/workspace/New-Team-Workspace~bfbc0679-6577-4ca9-b4ae-d7f2ecf31a12/collection/32758929-bcf644d0-658a-4883-a271-64f7e4f15456?action=share&creator=27400704))***:API endpoints
 
 
 ## Setup Instructions
 
-1. Clone the repository: `git clone https://github.com/your-username/centralized-youtube-backend.git`
+1. Clone the repository: `https://github.com/Sana348/Backend-Javascript`
 2. Install dependencies: `npm install`
 3. Set up environment variables: Create a `.env` file and add necessary variables
 4. Start the server: `npm start`
