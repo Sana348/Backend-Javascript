@@ -27,6 +27,7 @@ This project is a centralized YouTube backend application. It provides functiona
 - **Authentication and Authorization:** Bycrypt, JWT, cookie-parser
 - **File Uploading:** Multer, Cloudinary
 - **API Testing:** Postman
+- **[Eraser](https://app.eraser.io/workspace/lTqCut3pEaMefNuwwxLI?origin=share)**
 
 ## API Documentation
 
@@ -44,7 +45,7 @@ This project is a centralized YouTube backend application. It provides functiona
 
 - Ensure all APIs are working as expected using Postman
 - Test functionality and edge cases thoroughly
-- Utilize Mocha/Chai for automated testing if applicable
+
 
 ## Contributing
 
