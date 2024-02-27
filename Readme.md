@@ -30,7 +30,7 @@ This project is a centralized YouTube backend application. It provides functiona
 
 ## API Documentation
 
-- ***[Postman API'S]([link-to-postman-api-docs](https://red-astronaut-474428.postman.co/workspace/New-Team-Workspace~bfbc0679-6577-4ca9-b4ae-d7f2ecf31a12/collection/32758929-bcf644d0-658a-4883-a271-64f7e4f15456?action=share&creator=27400704))***:API endpoints
+- ***[Postman API'S](https://red-astronaut-474428.postman.co/workspace/New-Team-Workspace~bfbc0679-6577-4ca9-b4ae-d7f2ecf31a12/collection/32758929-bcf644d0-658a-4883-a271-64f7e4f15456?action=share&creator=27400704)***:API endpoints
 
 
 ## Setup Instructions
